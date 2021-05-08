@@ -9,38 +9,51 @@ import javax.persistence.*;
 @Entity
 @Table(name = "employee")
 @FilterDef(name = "salaryFilter", parameters = @ParamDef(name = "salary", type = "int"))
-@FilterDef(name = "depFilter", parameters = @ParamDef(name = "deptNo", type = "int"))
+@FilterDef(name = "ageFilter", parameters = @ParamDef(name = "age", type = "int"))
 @Filter(name = "salaryFilter", condition = "salary >:salary")
-@Filter(name = "depFilter", condition = "deptNo =:deptNo")
+@Filter(name = "ageFilter", condition = "age <:age")
 public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", unique = true, nullable = false)
-	private int employeeId;
+	private int id;
 
-	@Column(name = "ename")
-	private String employeeName;
+	@Column(name = "name")
+	private String name;
 
 	@Column(name = "salary")
 	private int salary;
 
-	@Column(name = "deptno")
-	private int deptNo;
+	@Column(name = "age")
+	private int age;
 
-	public int getEmployeeId() {
-		return employeeId;
+	@ManyToOne
+	@JoinColumn(name = "department_id", nullable = false)
+	@Filter(name = "depFilter", condition = "id =:id")
+	private Department department;
+
+	public int getId() {
+		return id;
 	}
 
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getEmployeeName() {
-		return employeeName;
+	public int getAge() {
+		return age;
 	}
 
-	public void setEmployeeName(String employeeName) {
-		this.employeeName = employeeName;
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getSalary() {
@@ -51,21 +64,7 @@ public class Employee {
 		this.salary = salary;
 	}
 
-	public int getDeptNo() {
-		return deptNo;
-	}
-
-	public void setDeptNo(int deptNo) {
-		this.deptNo = deptNo;
-	}
-
-	@Override
-	public String toString() {
-		return "Employee{" +
-				"employeeId=" + employeeId +
-				", employeeName='" + employeeName + '\'' +
-				", salary=" + salary +
-				", deptNo=" + deptNo +
-				'}';
+	public Department getDepartment() {
+		return department;
 	}
 }

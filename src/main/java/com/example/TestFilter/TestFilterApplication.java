@@ -21,26 +21,25 @@ public class TestFilterApplication
 			.getLogger(TestFilterApplication.class);
 
 	public static void main(String[] args) {
-		LOG.info("STARTING THE APPLICATION");
 		SpringApplication.run(TestFilterApplication.class, args);
-		LOG.info("APPLICATION FINISHED");
 	}
 
 	@Override
 	public void run(String... args) {
-		LOG.info("EXECUTING : command line runner");
 
 		Session session = sessionFactory.openSession();
 
 		session.enableFilter("salaryFilter")
 				.setParameter("salary", 4000);
 		session.enableFilter("depFilter")
-				.setParameter("deptNo", 1);
+				.setParameter("id", 1);
+		session.enableFilter("ageFilter")
+				.setParameter("age", 35);
 
-		List list = session.createQuery("select new com.example.TestFilter.EmployeeDto(e) from Employee e")
+		List list = session.createQuery("select new com.example.TestFilter.EmployeeDto(e) from Employee e left join e.department d")
 				.list();
 
-		list.forEach(e-> System.out.println(e));
+		list.forEach(System.out::println);
 
 		session.close();
 	}

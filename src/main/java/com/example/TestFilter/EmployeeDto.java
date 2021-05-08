@@ -1,22 +1,17 @@
 package com.example.TestFilter;
 
-import org.hibernate.annotations.Filter;
-import org.hibernate.annotations.FilterDef;
-import org.hibernate.annotations.ParamDef;
-
-import javax.persistence.*;
-
-
 public class EmployeeDto {
 
 	private String employeeName;
 	private int salary;
-	private int deptNo;
+	private int age;
+	private Department departmant;
 
 	public EmployeeDto(Employee emp) {
-		this.employeeName = emp.getEmployeeName();
+		this.employeeName = emp.getName();
 		this.salary = emp.getSalary();
-		this.deptNo = emp.getDeptNo();
+		this.age = emp.getAge();
+		this.departmant = emp.getDepartment();
 	}
 
 	public String getEmployeeName() {
@@ -35,12 +30,20 @@ public class EmployeeDto {
 		this.salary = salary;
 	}
 
-	public int getDeptNo() {
-		return deptNo;
+	public Department getDepartmant() {
+		return departmant;
 	}
 
-	public void setDeptNo(int deptNo) {
-		this.deptNo = deptNo;
+	public void setDepartmant(Department departmant) {
+		this.departmant = departmant;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
 	}
 
 	@Override
@@ -48,7 +51,8 @@ public class EmployeeDto {
 		return "EmployeeDto{" +
 				"employeeName='" + employeeName + '\'' +
 				", salary=" + salary +
-				", deptNo=" + deptNo +
+				", age=" + age +
+				", departmant=" + departmant +
 				'}';
 	}
 }
