@@ -10,8 +10,9 @@ import javax.persistence.*;
 @Table(name = "employee")
 @FilterDef(name = "salaryFilter", parameters = @ParamDef(name = "salary", type = "int"))
 @FilterDef(name = "ageFilter", parameters = @ParamDef(name = "age", type = "int"))
-
+@Filter(name = "salaryFilter", condition = "salary >:salary")
 @Filter(name = "ageFilter", condition = "age <:age")
+
 public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,6 +31,11 @@ public class Employee {
 	@ManyToOne
 	@JoinColumn(name = "department_id", nullable = false)
 	private Department department;
+
+	@ManyToOne
+	@JoinColumn(name = "vocation_id", nullable = false)
+
+	private Vocation vocation;
 
 	public int getId() {
 		return id;
@@ -65,5 +71,9 @@ public class Employee {
 
 	public Department getDepartment() {
 		return department;
+	}
+
+	public Vocation getVocation() {
+		return vocation;
 	}
 }

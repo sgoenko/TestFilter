@@ -22,7 +22,6 @@ public class Department {
     private String name;
 
     @OneToMany(mappedBy = "department")
-    @Filter(name = "salaryFilter", condition = "salary >:salary")
     private Set<Employee> employees;
 
     public int getId() {
@@ -39,14 +38,6 @@ public class Department {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(Set<Employee> employees) {
-        this.employees = employees;
     }
 
     @Override

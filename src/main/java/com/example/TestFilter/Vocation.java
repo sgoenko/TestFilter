@@ -21,7 +21,6 @@ public class Vocation {
 	private String name;
 
 	@OneToMany(mappedBy = "vocation")
-	@Filter(name = "salaryFilter", condition = "salary >:salary")
 	private Set<Employee> employees;
 
 	public int getId() {
