@@ -32,11 +32,19 @@ public class TestFilterApplication
 		session.enableFilter("salaryFilter")
 				.setParameter("salary", 4000);
 		session.enableFilter("depFilter")
-				.setParameter("id", 1);
-		session.enableFilter("ageFilter")
-				.setParameter("age", 35);
+				.setParameter("name", "Sales");
+//		session.enableFilter("ageFilter")
+//				.setParameter("age", 35);
 
-		List list = session.createQuery("select new com.example.TestFilter.EmployeeDto(e) from Employee e left join e.department d")
+//		select e.name, e.salary, e.age, d.name from employee e join department d on e.department_id=d.id where e.salary> 4000 and d.name='Sales';
+//		select e.name, e.salary, e.age, d.name from department d join employee e on e.department_id=d.id where e.salary> 4000 and d.name='Sales';
+//		select e.name, e.salary, e.age, d.name from department d, employee e where  e.department_id=d.id and e.salary> 4000 and d.name='Sales'
+//		Nick	5000	20	Sales
+//		Mike	6000	30	Sales
+
+//		String select = "select new com.example.TestFilter.EmployeeDto(e) from Employee e left join e.department d";
+		String select = "select new com.example.TestFilter.EmployeeDto(e) from Department d left join d.employees e";
+		List list = session.createQuery(select)
 				.list();
 
 		list.forEach(System.out::println);

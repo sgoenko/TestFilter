@@ -9,7 +9,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "department")
-@FilterDef(name = "depFilter", parameters = @ParamDef(name = "id", type = "int"))
+@FilterDef(name = "depFilter", parameters = @ParamDef(name = "name", type = "java.lang.String"))
+@Filter(name = "depFilter", condition = "name =:name")
 public class Department {
 
     @Id
@@ -21,6 +22,7 @@ public class Department {
     private String name;
 
     @OneToMany(mappedBy = "department")
+    @Filter(name = "salaryFilter", condition = "salary >:salary")
     private Set<Employee> employees;
 
     public int getId() {

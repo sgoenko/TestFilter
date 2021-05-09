@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Table(name = "employee")
 @FilterDef(name = "salaryFilter", parameters = @ParamDef(name = "salary", type = "int"))
 @FilterDef(name = "ageFilter", parameters = @ParamDef(name = "age", type = "int"))
-@Filter(name = "salaryFilter", condition = "salary >:salary")
+
 @Filter(name = "ageFilter", condition = "age <:age")
 public class Employee {
 	@Id
@@ -29,7 +29,6 @@ public class Employee {
 
 	@ManyToOne
 	@JoinColumn(name = "department_id", nullable = false)
-	@Filter(name = "depFilter", condition = "id =:id")
 	private Department department;
 
 	public int getId() {
